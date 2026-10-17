@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黄超 · 影像创作者作品集</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='24' height='24' fill='none' stroke='%23E0483E' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23E0483E'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --bg:#191512;
+  --bg-soft:#211C17;
+  --line:rgba(242,235,224,.10);
+  --ink:#F2EBE0;
+  --ink-dim:#A49A8E;
+  --red:#E0483E;
+  --gold:#D9A441;
+  --card:#221D18;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+/* 暗房颗粒噪点背景 */
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.container{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ===== 顶部导航 ===== */
+header{position:sticky;top:0;z-index:10;background:rgba(25,21,18,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font-weight:900;font-size:17px;letter-spacing:2px}
+.brand span{color:var(--red)}
+.nav-links{display:flex;gap:28px;font-size:14px;color:var(--ink-dim)}
+.nav-links a{color:var(--ink-dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--red)}
+
+/* ===== Hero ===== */
+.hero{padding:96px 0 72px;position:relative}
+.hero-meta{font-size:12px;letter-spacing:3px;color:var(--ink-dim);text-transform:uppercase;margin-bottom:18px}
+.hero-meta b{color:var(--gold);font-weight:500}
+.hero h1{
+  font-size:clamp(58px,11vw,104px);
+  font-weight:900;line-height:1.02;letter-spacing:-2px;
+  margin-bottom:10px;
+}
+.hero h1 .dot{color:var(--red)}
+.hero-sub{font-size:clamp(16px,2.4vw,20px);font-weight:500;color:var(--ink);margin-bottom:8px}
+.hero-sub b{color:var(--red);font-weight:700}
+.hero-desc{font-size:15px;color:var(--ink-dim);max-width:560px;margin-bottom:44px}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);
+}
+.stat{background:var(--bg);padding:22px 18px}
+.stat .num{font-size:clamp(26px,3.6vw,38px);font-weight:900;color:var(--gold);line-height:1.1}
+.stat .lbl{font-size:12.5px;color:var(--ink-dim);margin-top:4px}
+.frame-mark{position:absolute;right:0;top:40px;width:120px;height:120px;opacity:.35;pointer-events:none}
+.frame-mark svg{width:100%;height:100%}
+
+/* ===== 区块通用 ===== */
+section{padding:72px 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:38px}
+.sec-head .no{font-size:14px;color:var(--red);font-weight:700;letter-spacing:2px}
+.sec-head h2{font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:1px}
+.sec-head .rule{flex:1;height:1px;background:var(--line)}
+
+/* ===== 关于 ===== */
+.about p{font-size:16px;max-width:780px;color:var(--ink);margin-bottom:14px}
+.about p b{color:var(--gold)}
+.about .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.about .tag{
+  font-size:13px;padding:7px 14px;border:1px solid var(--line);border-radius:2px;
+  color:var(--ink-dim);letter-spacing:1px;
+}
+.about .tag b{color:var(--red);font-weight:500}
+
+/* ===== 筛选按钮 ===== */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.fbtn{
+  font-family:inherit;font-size:13.5px;letter-spacing:1px;
+  padding:8px 20px;background:transparent;color:var(--ink-dim);
+  border:1px solid var(--line);border-radius:2px;cursor:pointer;transition:all .2s;
+}
+.fbtn:hover{color:var(--ink);border-color:var(--ink-dim)}
+.fbtn.active{color:#fff;background:var(--red);border-color:var(--red)}
+
+/* ===== 作品网格 ===== */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+  background:var(--card);border:1px solid var(--line);padding:22px 20px 20px;
+  display:flex;flex-direction:column;gap:10px;transition:border-color .25s,transform .25s;
+}
+.card:hover{border-color:var(--red);transform:translateY(-3px)}
+.card .cat{
+  align-self:flex-start;font-size:11.5px;letter-spacing:2px;padding:3px 10px;
+  border-radius:2px;font-weight:700;
+}
+.cat-photo{color:var(--gold);border:1px solid var(--gold)}
+.cat-edit{color:#fff;background:var(--red)}
+.cat-proj{color:#fff;background:#3E4E63}
+.cat-ai{color:var(--gold);background:rgba(217,164,65,.12);border:1px solid var(--gold)}
+.card h3{font-size:17.5px;font-weight:700;letter-spacing:.5px}
+.card .desc{font-size:13px;color:var(--ink-dim);line-height:1.65;flex:1}
+.card .metric{font-size:14px;color:var(--ink);padding-top:8px;border-top:1px solid var(--line)}
+.card .metric b{color:var(--gold);font-weight:900;font-size:16px}
+.view-btn{
+  font-family:inherit;font-size:13px;letter-spacing:1px;text-align:center;
+  padding:9px 0;background:transparent;color:var(--ink);
+  border:1px solid var(--ink-dim);border-radius:2px;cursor:pointer;transition:all .2s;
+}
+.view-btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+
+/* ===== 能力 ===== */
+.skills{display:flex;flex-wrap:wrap;gap:10px}
+.skill{
+  font-size:13.5px;padding:10px 18px;border:1px solid var(--line);border-radius:2px;
+  color:var(--ink);letter-spacing:1px;background:var(--bg-soft);
+}
+.skill b{color:var(--red);font-weight:700}
+
+/* ===== 联系 ===== */
+.contact-box{
+  border:1px solid var(--line);background:var(--bg-soft);
+  padding:34px 28px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;
+}
+.contact-item .k{font-size:12px;color:var(--ink-dim);letter-spacing:2px;margin-bottom:4px}
+.contact-item .v{font-size:17px;font-weight:700}
+.contact-item .v a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--red);padding-bottom:2px}
+.mailto-btn{
+  font-family:inherit;font-size:14px;font-weight:700;letter-spacing:1px;
+  padding:13px 30px;background:var(--red);color:#fff;border:none;border-radius:2px;
+  cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .2s;
+}
+.mailto-btn:hover{opacity:.85}
+
+footer{padding:36px 0 44px;border-top:1px solid var(--line)}
+footer .inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--ink-dim)}
+footer .param{font-size:12px;letter-spacing:2px;color:var(--gold)}
+
+/* ===== Toast ===== */
+#toast{
+  position:fixed;left:50%;bottom:36px;transform:translateX(-50%) translateY(20px);
+  background:var(--card);color:var(--ink);border:1px solid var(--gold);
+  padding:12px 22px;font-size:13.5px;opacity:0;pointer-events:none;
+  transition:all .3s;z-index:99;max-width:86vw;text-align:center;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast b{color:var(--gold)}
+
+/* ===== 响应式 ===== */
+@media(max-width:860px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .frame-mark{display:none}
+}
+@media(max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .hero{padding:64px 0 48px}
+  .nav-links{display:none}
+  .contact-box{flex-direction:column;align-items:flex-start}
+  .card .desc{font-size:14px}
+  .card h3{font-size:18.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .card{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand">黄超<span>.</span></div>
+    <div class="nav-links">
+      <a href="#about">关于</a>
+      <a href="#works">作品</a>
+      <a href="#skills">能力</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<div class="hero container">
+  <div class="frame-mark" aria-hidden="true">
+    <svg viewBox="0 0 120 120" fill="none" stroke="#F2EBE0">
+      <path d="M0 8 L0 0 L8 0" stroke-width="3"/>
+      <path d="M120 8 L120 0 L112 0" stroke-width="3"/>
+      <path d="M0 112 L0 120 L8 120" stroke-width="3"/>
+      <path d="M120 112 L120 120 L112 120" stroke-width="3"/>
+      <circle cx="60" cy="60" r="28" stroke-width="1.5" opacity=".6"/>
+      <line x1="60" y1="2" x2="60" y2="118" stroke-width="1" opacity=".3" stroke-dasharray="3 5"/>
+      <line x1="2" y1="60" x2="118" y2="60" stroke-width="1" opacity=".3" stroke-dasharray="3 5"/>
+    </svg>
+  </div>
+  <div class="hero-meta">广播电视编导专业 <b>2027 届</b> · 新乡学院新闻传播学院</div>
+  <h1>黄超<span class="dot">.</span></h1>
+  <div class="hero-sub">影像创作者 · 从策划、拍摄到成片，<b>独立交付</b></div>
+  <p class="hero-desc">以镜头为笔的内容创作者。代运营政务账号单条视频突破百万播放，个人摄影自媒体累计播放 150 万+。相信作品与数据，比任何头衔都更有说服力。</p>
+  <div class="stats">
+    <div class="stat"><div class="num">100W+</div><div class="lbl">单条视频最高播放</div></div>
+    <div class="stat"><div class="num">4.5W</div><div class="lbl">代运营账号涨粉</div></div>
+    <div class="stat"><div class="num">150W+</div><div class="lbl">个人自媒体累计播放</div></div>
+    <div class="stat"><div class="num">200+</div><div class="lbl">独立交付成片</div></div>
+  </div>
+</div>
+
+<!-- ===== 关于 ===== -->
+<section id="about">
+  <div class="container">
+    <div class="sec-head"><span class="no">01</span><h2>关于我</h2><span class="rule"></span></div>
+    <div class="about">
+      <p>大学期间，我在不同角色里持续做同一件事——把内容做出来、做扎实、让数据说话。代运营过政务官方账号，也亲手把一个校园账号从 0 做到涨粉 500%；统筹过覆盖上万观众的校迎新晚会，也作为内容共创者入选明基「后期武林大会」计划。</p>
+      <p>累计独立交付 <b>200+ 条成片</b>、撰写 <b>100+ 份分镜脚本</b>，作品曾登播 CCTV-12、河南卫视、学习强国等平台。熟练运用 AI 视频与图像工具，探索「实拍 + AI」的新型内容生产方式。</p>
+      <div class="tags">
+        <span class="tag"><b>摄影</b> 单反 / 微单 · 光影 · 构图</span>
+        <span class="tag"><b>后期</b> 剪辑 · 调色 · 特效 · 音频</span>
+        <span class="tag"><b>AI</b> 视频 / 图像 · 提示词</span>
+        <span class="tag"><b>统筹</b> 活动拍摄 · 团队协作</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 作品 ===== -->
+<section id="works">
+  <div class="container">
+    <div class="sec-head"><span class="no">02</span><h2>精选作品</h2><span class="rule"></span></div>
+    <div class="filters">
+      <button class="fbtn active" data-filter="all">全部</button>
+      <button class="fbtn" data-filter="photo">摄影</button>
+      <button class="fbtn" data-filter="edit">后期</button>
+      <button class="fbtn" data-filter="proj">项目</button>
+      <button class="fbtn" data-filter="ai">AI创作</button>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-cat="proj">
+        <span class="cat cat-proj">项目</span>
+        <h3>新乡交警队官方账号代运营</h3>
+        <p class="desc">独立完成内容策略与互动短视频创意策划，从选题、拍摄到后期全流程交付政务内容。</p>
+        <div class="metric"><b>100W+</b> 单条播放 · <b>4.5W</b> 涨粉 · <b>27W</b> 互动</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+      <div class="card" data-cat="photo">
+        <span class="cat cat-photo">摄影</span>
+        <h3>个人摄影自媒体</h3>
+        <p class="desc">从 0 完成摄影垂类账号定位与选题策划，独立完成拍摄、调色、特效与合成全流程。</p>
+        <div class="metric"><b>150W+</b> 累计播放 · <b>3W</b> 单条最高获赞</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+      <div class="card" data-cat="edit">
+        <span class="cat cat-edit">后期</span>
+        <h3>校足球队赛事短视频</h3>
+        <p class="desc">独立制定「赛事高光 + 队员纪实」双线内容策略，跟进 30 余场现场拍摄并完成剪辑包装。</p>
+        <div class="metric"><b>500%</b> 四个月涨粉 · <b>25 条</b> 成片</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+      <div class="card" data-cat="proj">
+        <span class="cat cat-proj">项目</span>
+        <h3>金明池文旅 ×「厨子和戏子」宣传片</h3>
+        <p class="desc">对接开封文旅官方项目，统筹乐队艺人沟通与现场拍摄，完成脚本、取景、剪辑与视觉包装。</p>
+        <div class="metric"><b>全流程</b> 艺人统筹 · 拍摄 · 后期 · 官方宣发</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+      <div class="card" data-cat="proj">
+        <span class="cat cat-proj">项目</span>
+        <h3>校迎新晚会开场短片</h3>
+        <p class="desc">主导视频内容体系创意策划，组织 15 人学生团队完成开场短片与 12 段节目背景视频制作。</p>
+        <div class="metric"><b>1.9W+</b> 直播观看 · 提前 <b>3 天</b> 交付</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+      <div class="card" data-cat="ai">
+        <span class="cat cat-ai">AI创作</span>
+        <h3>明基「后期武林大会」内容共创</h3>
+        <p class="desc">经全国筛选入选样机漂流计划，独立策划制作 5 期后期过程系列短视频与色彩管理心得。</p>
+        <div class="metric"><b>6W+</b> 多平台阅读 · 标杆内容 · 拿满激励金</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+      <div class="card" data-cat="edit">
+        <span class="cat cat-edit">后期</span>
+        <h3>河南体育学院 · 省十五运会宣传</h3>
+        <p class="desc">运营竞训处官方账号，完成省十五运会宣传周期内的内容制作与传播执行。</p>
+        <div class="metric"><b>10W+</b> 宣传周期累计播放</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+      <div class="card" data-cat="photo">
+        <span class="cat cat-photo">摄影</span>
+        <h3>新乡高中活动纪实</h3>
+        <p class="desc">与河师大附中等新乡多所高中合作，负责校园活动拍摄与快剪交付，保障素材有序复用。</p>
+        <div class="metric"><b>50+ 条</b> 活动快剪 · <b>100+</b> 项目素材归档</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+      <div class="card" data-cat="edit">
+        <span class="cat cat-edit">后期</span>
+        <h3>多平台传播作品</h3>
+        <p class="desc">作品登播 CCTV-12、河南卫视、顶端新闻、学习强国等平台，多部被地方融媒体与文旅官方账号转载。</p>
+        <div class="metric"><b>4+</b> 国家级 / 省级平台登播</div>
+        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 能力 ===== -->
+<section id="skills">
+  <div class="container">
+    <div class="sec-head"><span class="no">03</span><h2>能力与工具</h2><span class="rule"></span></div>
+    <div class="skills">
+      <span class="skill"><b>PR</b> 剪辑</span>
+      <span class="skill"><b>达芬奇</b> 调色</span>
+      <span class="skill"><b>AE</b> 特效包装</span>
+      <span class="skill"><b>剪映</b> 专业版</span>
+      <span class="skill"><b>AU</b> 音频处理</span>
+      <span class="skill"><b>PS</b> 图像处理</span>
+      <span class="skill"><b>AI</b> 视频 / 图像工具</span>
+      <span class="skill"><b>无人机</b> 航拍（CAAC 证）</span>
+      <span class="skill"><b>分镜</b> 脚本撰写</span>
+      <span class="skill"><b>统筹</b> 拍摄计划 · 现场调度</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 联系 ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head"><span class="no">04</span><h2>联系我</h2><span class="rule"></span></div>
+    <div class="contact-box">
+      <div class="contact-item"><div class="k">电话</div><div class="v">13259782884</div></div>
+      <div class="contact-item"><div class="k">邮箱</div><div class="v"><a href="mailto:2310725188@qq.com">2310725188@qq.com</a></div></div>
+      <div class="contact-item"><div class="k">状态</div><div class="v">2027 届 · 可实习 · 接受出差</div></div>
+      <a class="mailto-btn" href="mailto:2310725188@qq.com?subject=应聘邀约-黄超-影像创作者">邮件联系</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container inner">
+    <div>© 2026 黄超 · 影像创作者作品集</div>
+    <div class="param">35mm · f/1.8 · 1/500s · ISO 100</div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+  // ===== 筛选 =====
+  var btns = document.querySelectorAll('.fbtn');
+  var cards = document.querySelectorAll('.card');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){b.classList.remove('active')});
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      cards.forEach(function(card){
+        var show = (f === 'all') || (card.getAttribute('data-cat') === f);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // ===== Toast 占位提示 =====
+  window.showToast = function(msg){
+    var t = document.getElementById('toast');
+    t.innerHTML = msg + '（可在页面代码中替换为你的作品 URL）';
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function(){t.classList.remove('show')}, 3200);
+  };
+})();
+</script>
+</body>
+</html>
