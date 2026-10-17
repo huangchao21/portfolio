@@ -83,41 +83,52 @@ section{padding:72px 0}
 }
 .about .tag b{color:var(--red);font-weight:500}
 
-/* ===== 筛选按钮 ===== */
-.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
-.fbtn{
-  font-family:inherit;font-size:13.5px;letter-spacing:1px;
-  padding:8px 20px;background:transparent;color:var(--ink-dim);
-  border:1px solid var(--line);border-radius:2px;cursor:pointer;transition:all .2s;
+/* ===== 作品分类排版 ===== */
+.works-note{font-size:14px;color:var(--ink-dim);margin-bottom:34px;max-width:720px}
+.cat-block{margin-bottom:34px;border:1px solid var(--line);background:var(--bg-soft)}
+.cat-title{
+  display:flex;align-items:baseline;gap:14px;padding:16px 22px;
+  border-bottom:1px solid var(--line);background:var(--card);
 }
-.fbtn:hover{color:var(--ink);border-color:var(--ink-dim)}
-.fbtn.active{color:#fff;background:var(--red);border-color:var(--red)}
-
-/* ===== 作品网格 ===== */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{
-  background:var(--card);border:1px solid var(--line);padding:22px 20px 20px;
-  display:flex;flex-direction:column;gap:10px;transition:border-color .25s,transform .25s;
+.cat-title span{font-size:20px;font-weight:900;letter-spacing:1px}
+.cat-title i{font-style:normal;font-size:12px;letter-spacing:2px;color:var(--ink-dim)}
+.cat-block .subs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.sub{
+  background:var(--bg-soft);padding:20px 22px 18px;
+  display:flex;flex-direction:column;gap:8px;transition:background .2s;
 }
-.card:hover{border-color:var(--red);transform:translateY(-3px)}
-.card .cat{
-  align-self:flex-start;font-size:11.5px;letter-spacing:2px;padding:3px 10px;
-  border-radius:2px;font-weight:700;
+.sub:hover{background:var(--card)}
+.sub h4{font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--gold)}
+.sub p{font-size:13.5px;color:var(--ink-dim);line-height:1.7;flex:1}
+.sub a{
+  font-size:12.5px;letter-spacing:1px;color:var(--red);
+  text-decoration:none;border-bottom:1px solid transparent;align-self:flex-start;
+  padding-bottom:2px;transition:border-color .2s;
 }
-.cat-photo{color:var(--gold);border:1px solid var(--gold)}
-.cat-edit{color:#fff;background:var(--red)}
-.cat-proj{color:#fff;background:#3E4E63}
-.cat-ai{color:var(--gold);background:rgba(217,164,65,.12);border:1px solid var(--gold)}
-.card h3{font-size:17.5px;font-weight:700;letter-spacing:.5px}
-.card .desc{font-size:13px;color:var(--ink-dim);line-height:1.65;flex:1}
-.card .metric{font-size:14px;color:var(--ink);padding-top:8px;border-top:1px solid var(--line)}
-.card .metric b{color:var(--gold);font-weight:900;font-size:16px}
-.view-btn{
-  font-family:inherit;font-size:13px;letter-spacing:1px;text-align:center;
-  padding:9px 0;background:transparent;color:var(--ink);
-  border:1px solid var(--ink-dim);border-radius:2px;cursor:pointer;transition:all .2s;
+.sub a:hover{border-color:var(--red)}
+/* 线上代表作 */
+.featured{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.fitem{
+  background:var(--bg-soft);padding:18px 22px;text-decoration:none;
+  display:flex;flex-direction:column;gap:6px;transition:background .2s;
 }
-.view-btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+.fitem:hover{background:var(--card)}
+.fitem .fname{font-size:15px;font-weight:700;color:var(--ink)}
+.fitem:hover .fname{color:var(--red)}
+.fitem .fdata{font-size:12.5px;color:var(--ink-dim)}
+/* 网盘入口 */
+.pan-link{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  border:1px solid var(--gold);background:rgba(217,164,65,.07);padding:22px 26px;
+}
+.pan-title{font-size:16px;font-weight:700;color:var(--ink)}
+.pan-sub{font-size:12.5px;color:var(--ink-dim);margin-top:3px}
+.pan-btn{
+  font-size:14px;font-weight:700;letter-spacing:1px;padding:12px 26px;
+  background:var(--red);color:#fff;text-decoration:none;border-radius:2px;transition:opacity .2s;
+}
+.pan-btn:hover{opacity:.85}
+.pan-code{font-size:13px;color:var(--gold);letter-spacing:1px}
 
 /* ===== 能力 ===== */
 .skills{display:flex;flex-wrap:wrap;gap:10px}
@@ -158,17 +169,17 @@ footer .param{font-size:12px;letter-spacing:2px;color:var(--gold)}
 
 /* ===== 响应式 ===== */
 @media(max-width:860px){
-  .grid{grid-template-columns:repeat(2,1fr)}
+  .subs{grid-template-columns:repeat(2,1fr)}
+  .featured{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr)}
   .frame-mark{display:none}
 }
 @media(max-width:560px){
-  .grid{grid-template-columns:1fr}
+  .subs{grid-template-columns:1fr}
+  .featured{grid-template-columns:1fr}
   .hero{padding:64px 0 48px}
   .nav-links{display:none}
   .contact-box{flex-direction:column;align-items:flex-start}
-  .card .desc{font-size:14px}
-  .card h3{font-size:18.5px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -235,88 +246,104 @@ footer .param{font-size:12px;letter-spacing:2px;color:var(--gold)}
 <!-- ===== 作品 ===== -->
 <section id="works">
   <div class="container">
-    <div class="sec-head"><span class="no">02</span><h2>精选作品</h2><span class="rule"></span></div>
-    <div class="filters">
-      <button class="fbtn active" data-filter="all">全部</button>
-      <button class="fbtn" data-filter="photo">摄影</button>
-      <button class="fbtn" data-filter="edit">后期</button>
-      <button class="fbtn" data-filter="proj">项目</button>
-      <button class="fbtn" data-filter="ai">AI创作</button>
+    <div class="sec-head"><span class="no">02</span><h2>作品集</h2><span class="rule"></span></div>
+    <p class="works-note">按创作类型分类整理，代表作品可在线观看，完整高清原片与原图见文末网盘。</p>
+
+    <!-- 线上代表作 -->
+    <div class="cat-block">
+      <div class="cat-title"><span>线上代表作</span><i>抖音 · 在线直看</i></div>
+      <div class="featured">
+        <a class="fitem" href="https://v.douyin.com/OQUve_q_eGU/" target="_blank" rel="noopener">
+          <span class="fname">新乡交警 · 交通安全宣传</span>
+          <span class="fdata">单条 100W+ 播放 · 涨粉 4.5W</span>
+        </a>
+        <a class="fitem" href="https://v.douyin.com/KuiyPe87wj0/" target="_blank" rel="noopener">
+          <span class="fname">明基色彩管理心得</span>
+          <span class="fdata">后期武林大会 · 6W+ 阅读</span>
+        </a>
+        <a class="fitem" href="https://v.douyin.com/lFOORnXkFZ8/" target="_blank" rel="noopener">
+          <span class="fname">更多作品 ①</span>
+        </a>
+        <a class="fitem" href="https://v.douyin.com/sPcCa8jdlN8/" target="_blank" rel="noopener">
+          <span class="fname">更多作品 ②</span>
+        </a>
+      </div>
     </div>
-    <div class="grid">
 
-      <div class="card" data-cat="proj">
-        <span class="cat cat-proj">项目</span>
-        <h3>新乡交警队官方账号代运营</h3>
-        <p class="desc">独立完成内容策略与互动短视频创意策划，从选题、拍摄到后期全流程交付政务内容。</p>
-        <div class="metric"><b>100W+</b> 单条播放 · <b>4.5W</b> 涨粉 · <b>27W</b> 互动</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+    <!-- 视频类 -->
+    <div class="cat-block" id="video-cat">
+      <div class="cat-title"><span>视频类</span><i>MV · 比赛作品 · 活动快剪 · 微电影 · 宣传片 · 专题片</i></div>
+      <div class="subs">
+        <div class="sub">
+          <h4>MV</h4>
+          <p>《等待》MV · 《龙南之门》MV</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
+        <div class="sub">
+          <h4>比赛作品</h4>
+          <p>《赤尾广告》《滚烫本我》《鸡公山漫步》《龙南拓扑》《色谱里的龙南》</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
+        <div class="sub">
+          <h4>活动类快剪</h4>
+          <p>毕业典礼纪实 · 教师节短片 · 反邪教活动 · 小学运动会 · 共渠音乐节 · 小小大朋友 vlog</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
+        <div class="sub">
+          <h4>微电影短片</h4>
+          <p>《回头》《替课风云》</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
+        <div class="sub">
+          <h4>宣传片</h4>
+          <p>《广播电视编导专业宣传片》</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
+        <div class="sub">
+          <h4>专题片</h4>
+          <p>《23亩校园里的体育星光》《烽火少年行》</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
       </div>
+    </div>
 
-      <div class="card" data-cat="photo">
-        <span class="cat cat-photo">摄影</span>
-        <h3>个人摄影自媒体</h3>
-        <p class="desc">从 0 完成摄影垂类账号定位与选题策划，独立完成拍摄、调色、特效与合成全流程。</p>
-        <div class="metric"><b>150W+</b> 累计播放 · <b>3W</b> 单条最高获赞</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+    <!-- 摄影类 -->
+    <div class="cat-block" id="photo-cat">
+      <div class="cat-title"><span>摄影类</span><i>风光摄影 · 海报设计</i></div>
+      <div class="subs">
+        <div class="sub">
+          <h4>风光摄影</h4>
+          <p>阿娜亚星轨 · 长岭背银河 · 剪影 · 鸡鸣山 · 秦岭 · 重庆 · 西安 · 中原福塔 等 28 张</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
+        <div class="sub">
+          <h4>海报设计</h4>
+          <p>校足球队招新海报 ×2</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
       </div>
+    </div>
 
-      <div class="card" data-cat="edit">
-        <span class="cat cat-edit">后期</span>
-        <h3>校足球队赛事短视频</h3>
-        <p class="desc">独立制定「赛事高光 + 队员纪实」双线内容策略，跟进 30 余场现场拍摄并完成剪辑包装。</p>
-        <div class="metric"><b>500%</b> 四个月涨粉 · <b>25 条</b> 成片</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+    <!-- 分镜头脚本 -->
+    <div class="cat-block" id="script-cat">
+      <div class="cat-title"><span>分镜头脚本</span><i>策划案 · 分镜 · 拍摄通告</i></div>
+      <div class="subs">
+        <div class="sub">
+          <h4>脚本与策划案</h4>
+          <p>《以"行"立校 以文化人》主题宣传片 · 《师者微光》（分镜 + 拍摄通告）·《23亩的篮球梦》·《冰面上的第一道划痕》·《初心艺术》宣传片策划方案 · 卫滨区检察院泥塑与知识产权微电影 ·《中原冰梦》</p>
+          <a href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">网盘查看</a>
+        </div>
       </div>
+    </div>
 
-      <div class="card" data-cat="proj">
-        <span class="cat cat-proj">项目</span>
-        <h3>金明池文旅 ×「厨子和戏子」宣传片</h3>
-        <p class="desc">对接开封文旅官方项目，统筹乐队艺人沟通与现场拍摄，完成脚本、取景、剪辑与视觉包装。</p>
-        <div class="metric"><b>全流程</b> 艺人统筹 · 拍摄 · 后期 · 官方宣发</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
+    <!-- 网盘入口 -->
+    <div class="pan-link">
+      <div class="pan-info">
+        <p class="pan-title">完整作品 · 高清原片 / 原图 / 脚本文档</p>
+        <p class="pan-sub">百度网盘 · 黄超的作品集（分镜头脚本 / 摄影类 / 视频类）</p>
       </div>
-
-      <div class="card" data-cat="proj">
-        <span class="cat cat-proj">项目</span>
-        <h3>校迎新晚会开场短片</h3>
-        <p class="desc">主导视频内容体系创意策划，组织 15 人学生团队完成开场短片与 12 段节目背景视频制作。</p>
-        <div class="metric"><b>1.9W+</b> 直播观看 · 提前 <b>3 天</b> 交付</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
-      </div>
-
-      <div class="card" data-cat="ai">
-        <span class="cat cat-ai">AI创作</span>
-        <h3>明基「后期武林大会」内容共创</h3>
-        <p class="desc">经全国筛选入选样机漂流计划，独立策划制作 5 期后期过程系列短视频与色彩管理心得。</p>
-        <div class="metric"><b>6W+</b> 多平台阅读 · 标杆内容 · 拿满激励金</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
-      </div>
-
-      <div class="card" data-cat="edit">
-        <span class="cat cat-edit">后期</span>
-        <h3>河南体育学院 · 省十五运会宣传</h3>
-        <p class="desc">运营竞训处官方账号，完成省十五运会宣传周期内的内容制作与传播执行。</p>
-        <div class="metric"><b>10W+</b> 宣传周期累计播放</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
-      </div>
-
-      <div class="card" data-cat="photo">
-        <span class="cat cat-photo">摄影</span>
-        <h3>新乡高中活动纪实</h3>
-        <p class="desc">与河师大附中等新乡多所高中合作，负责校园活动拍摄与快剪交付，保障素材有序复用。</p>
-        <div class="metric"><b>50+ 条</b> 活动快剪 · <b>100+</b> 项目素材归档</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
-      </div>
-
-      <div class="card" data-cat="edit">
-        <span class="cat cat-edit">后期</span>
-        <h3>多平台传播作品</h3>
-        <p class="desc">作品登播 CCTV-12、河南卫视、顶端新闻、学习强国等平台，多部被地方融媒体与文旅官方账号转载。</p>
-        <div class="metric"><b>4+</b> 国家级 / 省级平台登播</div>
-        <button class="view-btn" onclick="showToast('作品链接占位：投递前请替换为你的真实作品链接')">查看作品</button>
-      </div>
-
+      <a class="pan-btn" href="https://pan.baidu.com/s/1SgelvMTfdYCKYVcWz1K7sQ?pwd=qnjy" target="_blank" rel="noopener">打开作品网盘</a>
+      <span class="pan-code">提取码 qnjy</span>
     </div>
   </div>
 </section>
@@ -364,29 +391,7 @@ footer .param{font-size:12px;letter-spacing:2px;color:var(--gold)}
 
 <script>
 (function(){
-  // ===== 筛选 =====
-  var btns = document.querySelectorAll('.fbtn');
-  var cards = document.querySelectorAll('.card');
-  btns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      btns.forEach(function(b){b.classList.remove('active')});
-      btn.classList.add('active');
-      var f = btn.getAttribute('data-filter');
-      cards.forEach(function(card){
-        var show = (f === 'all') || (card.getAttribute('data-cat') === f);
-        card.style.display = show ? '' : 'none';
-      });
-    });
-  });
-
-  // ===== Toast 占位提示 =====
-  window.showToast = function(msg){
-    var t = document.getElementById('toast');
-    t.innerHTML = msg + '（可在页面代码中替换为你的作品 URL）';
-    t.classList.add('show');
-    clearTimeout(t._timer);
-    t._timer = setTimeout(function(){t.classList.remove('show')}, 3200);
-  };
+  // 预留：无交互脚本（作品链接均为真实跳转）
 })();
 </script>
 </body>
